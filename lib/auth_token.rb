@@ -1,7 +1,8 @@
 require 'jwt'
 
 module AuthToken
-  def self.issue_token(payload)
+  def self.issue_token(payload = {})
+    raise InvalidPayload unless payload
     payload['exp'] = 24.hours.from_now.to_i
     JWT.encode(payload, Rails.application.secrets.secret_key_base)
   end
@@ -11,4 +12,6 @@ module AuthToken
   rescue
     false
   end
+
+  class InvalidPayload < StandardError; end
 end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'User Sessions API' do
-  context 'sign up' do
+RSpec.describe 'User Sessions API', type: :request do
+  context 'POST /api/v1/users' do
     it 'successfully signs up user' do
       post user_registration_path,
            user: { email: 'test@test.com', password: '123123123' }
@@ -32,7 +32,7 @@ describe 'User Sessions API' do
     end
   end
 
-  context 'sign in' do
+  context 'POST api/v1/users/sign_in' do
     let(:user) { create :user }
 
     context 'success' do

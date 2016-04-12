@@ -5,3 +5,4 @@ guard :rspec, cmd: 'bundle exec rspec -f d' do
   watch(%r{^app/controllers/(.+)\.rb}) { |m| "spec/requests/#{m[1]}_spec.rb" }
   watch('app/controllers/application_controller.rb') { "spec/requests" }
 end
+  
