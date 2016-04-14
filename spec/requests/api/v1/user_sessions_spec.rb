@@ -38,7 +38,7 @@ RSpec.describe 'User Sessions API', type: :request do
     context 'success' do
       before do
         post user_session_path,
-             user: { email: user.email,  password: '123123123' }
+             user: { email: user.email, password: '123123123' }
       end
 
       it 'signs user in' do
