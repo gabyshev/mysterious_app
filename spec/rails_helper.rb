@@ -14,4 +14,5 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   config.include FactoryGirl::Syntax::Methods
   config.include Requests::JsonHelpers, type: :request
+  config.include Requests::SessionHelpers, type: :request
 end
