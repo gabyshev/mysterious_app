@@ -1,4 +1,4 @@
-class BlogPostsController < ApplicationController
+class V1::BlogPostsController < ApplicationController
   before_filter :verify_jwt_token, except: [:index, :show]
   before_action :set_post,         only:   [:show, :update, :destroy]
 
