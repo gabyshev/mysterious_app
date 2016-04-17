@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       registrations: 'v1/users/registrations'
     }, only: [:sessions, :registrations]
 
-    resources :blog_posts, except: [:new, :edit]
+    resources :blog_posts, except: [:new, :edit] do
+      resources :comments, only: [:create, :destroy]
+    end
   end
 end
