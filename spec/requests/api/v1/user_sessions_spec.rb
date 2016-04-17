@@ -2,35 +2,41 @@ require 'rails_helper'
 
 RSpec.describe 'User Sessions API', type: :request do
   context 'POST /api/v1/users' do
-    it 'successfully signs up user' do
-      post user_registration_path,
-           { user: { email: 'test@test.com', password: '123123123' } },
-           headers
-      expect(response.status).to eq 201
-      expect(json['token']).to be_nil
+    context 'success' do
+      before do
+        post user_registration_path,
+             { user: { email: 'test@test.com', password: '123123123' } },
+             headers
+      end
+
+      it { expect(response).to have_http_status(201) }
+      it { expect(json['token']).to be_nil }
+      it { expect(User.count).to eq(1) }
     end
 
     context 'failure' do
-      let!(:user) { create :user }
+      context 'invalid email' do
+        let!(:user) { create :user }
+        before do
+          post user_registration_path,
+               { user: { email: user.email, password: '123123123' } },
+               headers
+        end
 
-      it 'shows email error message' do
-        post user_registration_path,
-             { user: { email: user.email, password: '123123123' } },
-             headers
-
-        expect(response.status).to eq 422
-        expect(json['errors'].keys).to include 'email'
-        expect(json['errors']['email']).to eq ['has already been taken']
+        it { expect(response).to have_http_status(422) }
+        it { expect(json['errors'].keys).to include 'email' }
+        it { expect(json['errors']['email']).to eq ['has already been taken'] }
       end
 
-      it 'shows password error message' do
-        post user_registration_path,
-             { user: { email: 'test@test.com', password: '123123' } },
-             headers
-
-        expect(response.status).to eq 422
-        expect(json['errors'].keys).to include 'password'
-        expect(json['errors']['password']).to eq ['is too short (minimum is 8 characters)']
+      context 'invalid password' do
+        before do
+          post user_registration_path,
+               { user: { email: 'test@test.com', password: '123123' } },
+               headers
+        end
+        it { expect(response).to have_http_status(422) }
+        it { expect(json['errors'].keys).to include 'password' }
+        it { expect(json['errors']['password']).to eq ['is too short (minimum is 8 characters)'] }
       end
     end
   end
@@ -45,22 +51,19 @@ RSpec.describe 'User Sessions API', type: :request do
              headers
       end
 
-      it 'signs user in' do
-        expect(response.status).to eq 200
-      end
-
-      it 'response have token' do
-        expect(json['token']).to_not be_nil
-      end
+      it { expect(response).to have_http_status(200) }
+      it { expect(json['token']).to_not be_nil }
     end
 
     context 'failure' do
-      it 'shows erros message' do
+      before do
         post user_session_path,
              { user: { email: user.email, password: '123123345' } },
              headers
-        expect(response.status).to eq 401
       end
+
+      it { expect(response).to have_http_status(401) }
+      it { expect(json['error']).to eq 'Invalid email or password.' }
     end
   end
 end
