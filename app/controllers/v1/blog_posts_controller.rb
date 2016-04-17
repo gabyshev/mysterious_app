@@ -1,6 +1,6 @@
 class V1::BlogPostsController < ApplicationController
-  before_filter :verify_jwt_token, except: [:index, :show]
-  before_action :set_post,         only:   [:show, :update, :destroy]
+  before_action :verify_jwt_token, except: [:index, :show]
+  before_action :set_blog_post,    only:   [:show, :update, :destroy]
 
   def index
     blog_posts = BlogPost.all
@@ -14,7 +14,7 @@ class V1::BlogPostsController < ApplicationController
   end
 
   def show
-    respond_with(@blog_post)
+    render json: @blog_post, serializer: BlogPostShowSerializer
   end
 
   def update
@@ -29,7 +29,7 @@ class V1::BlogPostsController < ApplicationController
 
   private
 
-  def set_post
+  def set_blog_post
     @blog_post = BlogPost.find(params[:id])
   end
 
