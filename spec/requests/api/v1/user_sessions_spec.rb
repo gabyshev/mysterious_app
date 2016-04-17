@@ -4,7 +4,8 @@ RSpec.describe 'User Sessions API', type: :request do
   context 'POST /api/v1/users' do
     it 'successfully signs up user' do
       post user_registration_path,
-           user: { email: 'test@test.com', password: '123123123' }
+           { user: { email: 'test@test.com', password: '123123123' } },
+           headers
       expect(response.status).to eq 201
       expect(json['token']).to be_nil
     end
@@ -14,7 +15,8 @@ RSpec.describe 'User Sessions API', type: :request do
 
       it 'shows email error message' do
         post user_registration_path,
-             user: { email: user.email, password: '123123123' }
+             { user: { email: user.email, password: '123123123' } },
+             headers
 
         expect(response.status).to eq 422
         expect(json['errors'].keys).to include 'email'
@@ -23,7 +25,8 @@ RSpec.describe 'User Sessions API', type: :request do
 
       it 'shows password error message' do
         post user_registration_path,
-             user: { email: 'test@test.com', password: '123123' }
+             { user: { email: 'test@test.com', password: '123123' } },
+             headers
 
         expect(response.status).to eq 422
         expect(json['errors'].keys).to include 'password'
@@ -38,7 +41,8 @@ RSpec.describe 'User Sessions API', type: :request do
     context 'success' do
       before do
         post user_session_path,
-             user: { email: user.email, password: '123123123' }
+             { user: { email: user.email, password: '123123123' } },
+             headers
       end
 
       it 'signs user in' do
@@ -53,7 +57,8 @@ RSpec.describe 'User Sessions API', type: :request do
     context 'failure' do
       it 'shows erros message' do
         post user_session_path,
-             user: { email: user.email, password: '123123345' }
+             { user: { email: user.email, password: '123123345' } },
+             headers
         expect(response.status).to eq 401
       end
     end
