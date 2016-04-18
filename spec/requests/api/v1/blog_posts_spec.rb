@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Blog Posts API', type: :request do
-  let!(:blog_post) { create :blog_post }
-  let(:user) { create :user }
-  let(:params) { { blog_post: { title: 'title', body: 'body', user_id: user.id } } }
+  let(:user)       { create :user }
+  let!(:blog_post) { create :blog_post, user: user }
+  let(:params)     { { blog_post: { title: 'title', body: 'body', user_id: user.id } } }
 
   context '#index' do
     before do
