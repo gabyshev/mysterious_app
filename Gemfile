@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'jwt'
 gem 'active_model_serializers'
+gem 'pundit'
 
 group :development, :test do
   gem 'byebug'
