@@ -8,7 +8,7 @@ Sample Ruby on Rails application with versioned RESTful JSON API.
 - Users can comment other users's blog posts
 - User can edit/delete only his own blog post
 - User can delete only his own comment
-- Admin user have no restrictions
+- Admin user has no restrictions
 
 Original [description](https://docs.google.com/document/d/124CtpHv1lGn2PN_rsuXykHJ_cKkO0CYNjSeESOQFJRM/edit)
 
