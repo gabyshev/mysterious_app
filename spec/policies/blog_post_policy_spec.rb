@@ -9,13 +9,13 @@ RSpec.describe BlogPostPolicy do
   permissions :update?, :destroy? do
     context 'role :user' do
       let(:other_user) { build_stubbed :user }
-      let(:other_blog_post) { build_stubbed :blog_post, user: other_user }
-      it 'should allow user to modify his own blog post' do
+
+      it 'can modify his own blog post' do
         expect(subject).to permit(user, blog_post)
       end
 
-      it "should not allow user to modify other user's blog post" do
-        expect(subject).to_not permit(user, other_blog_post)
+      it "cannot modify other user's blog post" do
+        expect(subject).to_not permit(other_user, blog_post)
       end
     end
 
