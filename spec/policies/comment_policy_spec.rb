@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe CommentPolicy do
   subject { CommentPolicy }
 
-  let(:user) { build_stubbed :user }
+  let(:user)    { build_stubbed :user }
   let(:comment) { build_stubbed :comment, user: user }
 
-  permissions :update?, :destroy? do
+  permissions :destroy? do
     context 'role :user' do
       let(:other_user) { build_stubbed :user }
 

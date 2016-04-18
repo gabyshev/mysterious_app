@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Comments API', type: :request do
-  let(:user) { create :user }
+  let(:user)      { create :user }
   let(:blog_post) { create :blog_post }
   let(:token) do
     sign_in user: user
@@ -21,7 +21,7 @@ RSpec.describe 'Comments API', type: :request do
   end
 
   context '#delete' do
-    let(:comment) { create :comment }
+    let(:comment) { create :comment, user: user }
     before do
       delete blog_post_comment_path(blog_post, comment), nil, auth_headers
     end
