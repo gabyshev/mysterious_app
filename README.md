@@ -58,7 +58,7 @@ There are few suite spots in this repository
 
 #### Authentication && Authorization
 
-User have roles: `user`, `guest`, `admin`.
+User roles are: `user`, `guest`, `admin`.
 Where:
 - `user` is an ordinary user
 - `guest` is non registered user
@@ -66,7 +66,7 @@ Where:
 
 I have used `devise` with some improvements.
 
-- Due to testing purposes I [do not include](config/routes.rb) ability for users to edit and delete their profiles
+- Due to testing purposes I [do not include](config/routes.rb#L15) ability for users to edit and delete their profiles
 - After successful sign in user get auth token [generated](lib/auth_token.rb) with `JWT`
 - Auth token lives 24 hours
 - Auth token always checked in modifying operations. E.g. in `create`, `update`, `destroy` actions with [`verify_jwt_token`](app/controllers/application_controller.rb#L12)
