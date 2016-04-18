@@ -19,10 +19,12 @@ class V1::BlogPostsController < ApplicationController
 
   def update
     @blog_post.update(blog_post_params)
+    authorize @blog_post
     respond_with(@blog_post)
   end
 
   def destroy
+    authorize @blog_post
     @blog_post.destroy
     respond_with(@blog_post)
   end
