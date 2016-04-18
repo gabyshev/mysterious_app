@@ -40,6 +40,18 @@ Original [description](https://docs.google.com/document/d/124CtpHv1lGn2PN_rsuXyk
   44 examples, 0 failures
   ```
 
+4. Seed the database
+
+  ```
+  $ rake db:seed
+  ```
+
+5. Run the server
+
+  ```
+  $ rails server
+  ```
+
 ## What's interesting?
 
 There are few suite spots in this repository
