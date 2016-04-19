@@ -5,7 +5,7 @@ Sample Ruby on Rails application with versioned RESTful JSON API.
 ##### Features:
 - Users can register themselves
 - Every user can create blog post to share their thoughts
-- Users can comment other users's blog posts
+- Users can comment other users' blog posts
 - User can edit/delete only his own blog post
 - User can delete only his own comment
 - Admin user has no restrictions
