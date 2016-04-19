@@ -79,6 +79,7 @@ There are several approaches to build an API. Personally I think that using vers
 
 - [Api constraint](app/constraints/api_constraint.rb) to parse and check `accept` header
 - `active_model_serializers` to have custom json [response](app/serializers)
+- [CORS](config/application.rb#L21) enabled. So that it's possible to build front end application on top of the API
 
 
 #### Tests
